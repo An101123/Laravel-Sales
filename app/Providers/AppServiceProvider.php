@@ -29,8 +29,17 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('frontend.layouts.header',function($view){
             $category = category::all();
             $view->with('category',$category);
+            
         });
         view()->composer('frontend.layouts.header', function($view){
+            if(Session('cart')){
+                $oldCart = Session::get('cart');
+                $cart = new Cart($oldCart);
+            $view->with(['cart'=>Session::get('cart'), 'product_cart'=>$cart->items, 'totalPrice'=>$cart->totalPrice, 'totalQuantity'=>$cart->totalQuantity]);
+            }
+
+        });
+        view()->composer('frontend.pages.order', function($view){
             if(Session('cart')){
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);

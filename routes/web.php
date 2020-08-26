@@ -51,3 +51,13 @@ Route::get('shoesstore/aboutus', 'FrontEnd\PagesController@getAboutus');
 //Cart
 Route::get('shoesstore/addToCart/{id}', 'FrontEnd\PagesController@getAddToCart');
 Route::get('shoesstore/deleteCart/{id}', 'FrontEnd\PagesController@getDeleteItemInCart');
+
+//Order
+Route::get('shoesstore/order', 'FrontEnd\PagesController@getOrder');
+Route::post('shoesstore/order', 'FrontEnd\PagesController@postOrder');
+
+//login
+
+Route::get('shoesstore/login', 'FrontEnd\PagesController@getLogin');
+Route::get('shoesstore/signup', 'FrontEnd\PagesController@getSignup');
+Route::post('shoesstore/signup', 'FrontEnd\PagesController@postSignup');

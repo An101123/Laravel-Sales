@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\aboutUs;
 use App\Models\product;
 use App\Models\Cart;
+use App\Models\customer;
+use App\Models\order;
+use App\Models\orderDetail;
+use App\Models\promotion;
+use App\Models\User;
+use Hash;
 use Session;
 
 use Illuminate\Support\Facades\DB;
@@ -59,20 +65,23 @@ class PagesController extends Controller
         ->take(4)->get();
         return view('frontend.pages.productDetails', compact('productDetail','relatedProducts', 'topProduct','newProduct'));
     }
+
     function getContact()
     {
         return view('frontend.pages.contact');
     }
+
     function getAboutus()
     {
         return view('frontend.pages.aboutus');
     }
+
     function getAddToCart(Request $request, $id){
         $product = Product::find($id);
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $id);
-        $request->session()->put('cart',$cart);
+        $request->session()->put('cart', $cart);
         
         return redirect()->back();
     }
@@ -89,5 +98,83 @@ class PagesController extends Controller
             Session::forget('cart');
         }
         return redirect()->back();
+    }
+
+    function getOrder()
+    {
+        // $promotion = DB::table('promotions')->get();
+        $promotion = promotion::all();
+        // var_dump($promotion);exit;
+        return view('frontend.pages.order', compact('promotion'));
+    }
+    function postOrder(Request $request){
+        $cart = Session::get('cart');
+        // dd($cart);exit;
+        $customer = new  customer;
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phoneNumber = $request->phoneNumber;
+        $customer->address = $request->address;
+        $customer->note = $request->notes;
+        $customer->save();
+        
+        $order = new Order;
+        $order->id_customer = $customer->id;
+        $order->dateOrder = date('Y-m-d');
+        $order->amount = $cart->totalPrice;
+        $order->id_promotion = $request->promotion;
+        $order->save();
+
+        // var_dump($cart->totalPrice);exit;
+        foreach($cart->items as $key=>$value){
+            $orderDetail = new orderDetail;
+            $orderDetail->id_order = $order->id;
+            $orderDetail->id_product = $key;
+            $orderDetail->quantity = $value['quantity'];
+            $orderDetail->price = ($value['price']/$value['quantity']);
+            $orderDetail->save();
+        }
+        Session::forget('cart');
+
+        return redirect()->back()->with('notification', 'Thank you for your order');
+       
+    }
+
+    function getLogin()
+    {
+        return view('frontend.pages.login');
+    }
+    function getSignup()
+    {
+        return view('frontend.pages.signup');
+    }
+
+    function postSignup(Request $request){
+        $this->validate($request,
+        [
+         'name'=>'required|min:3',
+         'email'=>'required|unique:Users,email',
+         'password'=>'required|min:8|max:32',
+         'passwordConfirm'=>'required|same:password'
+        ],
+        [
+            'name.required'=>'Name is require!',
+            'name.min'=>'Name must be at least three characters long',
+            'email.required'=>'Email is require!',
+            'email.unique'=>'Email has existed',
+            'password.required'=>'Password is require!',
+            'password.min'=>'Password must be at least eight characters long',
+            'password.max'=>'The largest length of the password is 32 characters',
+            'passwordConfirm.required'=>'Password Confirm is required',
+            'passwordConfirm.same'=>'Password Confirm is wrong!'
+        ]);
+    $user= new User;
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->phoneNumber = $request->phoneNumber;
+    $user->password = Hash::make($request->password);
+    $user->save();
+        
+    return redirect()->back()->with('notification', 'You have signed up successfully');
     }
 }

@@ -10,8 +10,8 @@
             <div class="pull-right auto-width-right">
                 <ul class="top-details menu-beta l-inline">
                     <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="#">Đăng kí</a></li>
-                    <li><a href="#">Đăng nhập</a></li>
+                    <li><a href="{{url('shoesstore/signup')}}">Đăng kí</a></li>
+                    <li><a href="{{url('shoesstore/login')}}">Đăng nhập</a></li>
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -21,7 +21,7 @@
         <div class="container beta-relative">
             <div class="pull-left">
                 <a href="index.html"
-                   id="logo"><img src="assets/dest/images/logo-cake.png"
+                   id="logo"><img src="{{url('image/logo.jpg')}}"
                          width="200px"
                          alt=""></a>
             </div>
@@ -83,7 +83,7 @@
 
                                 <div class="center">
                                     <div class="space10">&nbsp;</div>
-                                    <a href="checkout.html"
+                                    <a href="{{url('shoesstore/order')}}"
                                        class="beta-btn primary text-center">Đặt hàng <i
                                            class="fa fa-chevron-right"></i></a>
                                 </div>
