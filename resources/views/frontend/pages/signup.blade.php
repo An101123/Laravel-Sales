@@ -13,12 +13,7 @@
         <div class="clearfix"></div>
     </div>
 </div>
-<div class="row">@if(Session::has('notification'))
-    <div class="alert alert-success">
-        {{Session::get('notification')}}
-    </div>
 
-    @endif</div>
 <div class="container">
     <div id="content">
 
@@ -28,16 +23,25 @@
             <input type="hidden"
                    name="_token"
                    value="{{ csrf_token() }}">
-            @if(count($errors)>0)
-            <div class="alert alert-danger">
-                @foreach($errors->all() as $err)
-                {{$err}} <br />
-                @endforeach
-            </div>
-            @endif
+
             <div class="row">
                 <div class="col-sm-3"></div>
+
                 <div class="col-sm-6">
+                    <div class="row">@if(Session::has('notification'))
+                        <div class="alert alert-success">
+                            {{Session::get('notification')}}
+                        </div>
+
+                        @endif</div>
+                    <div class="row"> @if(count($errors)>0)
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $err)
+                            {{$err}} <br />
+                            @endforeach
+                        </div>
+                        @endif</div>
+
                     <h4>Đăng kí</h4>
 
 
@@ -67,7 +71,6 @@
                                id="adress"
                                required>
                     </div>
-
 
                     <div class="form-block">
                         <label for="phone">Phone*</label>

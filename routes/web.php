@@ -19,11 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
+Route::get('/home', 'HomeController@index')->name('home')->middleware('manageUser');
+Route::get('/afterLogin',  'AfterLoginController@index');
+Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes(['verify' => true]);
 
+Route::group(['prefix' => 'admin','middleware'=>'admin','namespace'=>'Admin'],function(){
 Route::get('/home', 'HomeController@index')->middleware('verified');
 
 Route::resource('categories', 'categoryController');
@@ -39,6 +40,7 @@ Route::resource('orders', 'orderController');
 Route::resource('orderDetails', 'orderDetailController');
 
 Route::resource('aboutuses', 'aboutUsController');
+});
 
 //Client
 
@@ -56,8 +58,13 @@ Route::get('shoesstore/deleteCart/{id}', 'FrontEnd\PagesController@getDeleteItem
 Route::get('shoesstore/order', 'FrontEnd\PagesController@getOrder');
 Route::post('shoesstore/order', 'FrontEnd\PagesController@postOrder');
 
+//Search
+Route::get('shoesstore/search', 'FrontEnd\PagesController@search');
+
 //login
 
-Route::get('shoesstore/login', 'FrontEnd\PagesController@getLogin');
-Route::get('shoesstore/signup', 'FrontEnd\PagesController@getSignup');
-Route::post('shoesstore/signup', 'FrontEnd\PagesController@postSignup');
+// Route::get('/login', 'FrontEnd\PagesController@getLogin');
+// Route::post('/login', 'FrontEnd\PagesController@postLogin');
+
+// Route::get('shoesstore/signup', 'FrontEnd\PagesController@getSignup');
+// Route::post('shoesstore/signup', 'FrontEnd\PagesController@postSignup');

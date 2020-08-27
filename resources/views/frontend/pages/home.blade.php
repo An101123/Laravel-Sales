@@ -6,7 +6,7 @@
             <div class="bannercontainer">
                 <div class="banner">
                     <ul>
-                        @foreach($aboutus as $abus)
+                        @foreach($aboutus as $aboutus)
                         <!-- THE FIRST SLIDE -->
                         <li data-transition="boxfade"
                             data-slotamount="20"
@@ -34,9 +34,9 @@
                                      data-bgposition="center center"
                                      data-bgrepeat="no-repeat"
                                      data-lazydone="undefined"
-                                     src="image/{{$abus->image}}"
-                                     data-src="image/{{$abus->image}}"
-                                     style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('image/{{$abus->image}}'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
+                                     src="image/{{$aboutus->image}}"
+                                     data-src="image/{{$aboutus->image}}"
+                                     style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('image/{{$aboutus->image}}'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
                                 </div>
                             </div>
 

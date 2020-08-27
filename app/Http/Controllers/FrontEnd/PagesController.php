@@ -11,9 +11,11 @@ use App\Models\customer;
 use App\Models\order;
 use App\Models\orderDetail;
 use App\Models\promotion;
-use App\Models\User;
-use Hash;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 
@@ -140,10 +142,33 @@ class PagesController extends Controller
        
     }
 
-    function getLogin()
-    {
-        return view('frontend.pages.login');
-    }
+    // function getLogin()
+    // {
+    //     return view('frontend.pages.login');
+    // }
+
+    // function postLogin(Request $request)
+    // {
+    //     $this->validate($request,
+    //     [
+    //         'email'=> 'required|email',
+    //         'password'=> 'required|password'
+    //     ],
+    //     [
+    //         'email.required'=>'Email is require!',
+    //         'password.required'=>'Password is require!',
+    //     ]);
+
+    //     // $credentials = array('email'=>$request->email, 'password'=>$request->password);
+    //     if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password]))
+    //     {
+    //         return redirect()->back()->with(['flag'=>'success', 'message'=>'Login Success']);
+    //     }
+    //     else
+    //     {
+    //         return redirect()->back()->with(['flag'=>'danger', 'message'=>'Email or password is incorrect']);
+    //     }
+    // }
     function getSignup()
     {
         return view('frontend.pages.signup');
@@ -172,9 +197,17 @@ class PagesController extends Controller
     $user->name = $request->name;
     $user->email = $request->email;
     $user->phoneNumber = $request->phoneNumber;
+    $user->address = $request->address;
     $user->password = Hash::make($request->password);
     $user->save();
         
     return redirect()->back()->with('notification', 'You have signed up successfully');
+    }
+
+
+    function search(Request $request)
+    {
+        $product = DB::table('products')->where('name','like','%'.$request->key.'%')->orwhere('price','=',$request->key)->get();
+        return view('frontend.pages.search', compact('product'));
     }
 }

@@ -3,38 +3,43 @@
         <div class="container">
             <div class="pull-left auto-width-left">
                 <ul class="top-menu menu-beta l-inline">
-                    <li><a href=""><i class="fa fa-home"></i> 90-92 Lê Thị Riêng, Bến Thành, Quận 1</a></li>
-                    <li><a href=""><i class="fa fa-phone"></i> 0163 296 7751</a></li>
+                    <a href="index.html"
+                       id="logo"><img width="100px"
+                             src="{{url('image/logo.jpg')}}"
+                             width="200px"
+                             alt=""></a>
                 </ul>
             </div>
             <div class="pull-right auto-width-right">
+                @if(Auth::check())
+                <ul class="top-details menu-beta l-inline">
+                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản: {{Auth::user()->name}}</a></li>
+                    <li><a href="{{url('/logout')}}">Đăng xuất</a></li>
+                </ul>
+
+                @else
                 <ul class="top-details menu-beta l-inline">
                     <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="{{url('shoesstore/signup')}}">Đăng kí</a></li>
-                    <li><a href="{{url('shoesstore/login')}}">Đăng nhập</a></li>
+                    <li><a href="{{url('register')}}">Đăng kí</a></li>
+                    <li><a href="{{url('login')}}">Đăng nhập</a></li>
                 </ul>
+                @endif
             </div>
             <div class="clearfix"></div>
         </div> <!-- .container -->
     </div> <!-- .header-top -->
     <div class="header-body">
         <div class="container beta-relative">
-            <div class="pull-left">
-                <a href="index.html"
-                   id="logo"><img src="{{url('image/logo.jpg')}}"
-                         width="200px"
-                         alt=""></a>
-            </div>
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
                 <div class="beta-comp">
                     <form role="search"
                           method="get"
                           id="searchform"
-                          action="/">
+                          action="{{url('shoesstore/search')}}">
                         <input type="text"
                                value=""
-                               name="s"
+                               name="key"
                                id="s"
                                placeholder="Nhập từ khóa..." />
                         <button class="fa fa-search"
