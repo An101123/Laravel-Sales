@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use Auth;
 
 
 class LoginController extends Controller
@@ -41,19 +41,34 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // public function login(Request $request) {
-    //     $username = $request->username;
-    //     $pass = $request->pass;
 
-    //     $user = \DB::table("users")->selet("role")->where("username", $username)->andWhere()
-    //     ->get();
 
-    //     if($user->role == 1 ) {
-    //         return $request->redirectPath();
-    //     } eles {
-    //         return redirect(router('/login'))
-    //     }
-    // }
+    public function login(Request $request) {
+        $user_login = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+        if (Auth::attempt($user_login)) {
+            $user = \DB::table('users')->select('role')
+            ->where([
+                ['email', $request->email],
+                // ['del_flg', \Config::get('constants.DEL_FLG_0')],
+                ['email_verified_at', '<>', '']
+            ])->first();
+
+            if ($user) {
+                $request->session()->put('users', $user_login);
+                if ($user->role == '1') {
+                    // User : return screen register schedule
+                    return redirect('/home');
+                } else {
+                    return redirect('/shoesstore');
+                }
+            } else {
+                return redirect('/login');
+            }
+        }
+    }
 
 
     protected function credentials(Request $request)

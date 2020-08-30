@@ -17,6 +17,7 @@
                     <li><a href="{{url('/logout')}}">Đăng xuất</a></li>
                 </ul>
 
+
                 @else
                 <ul class="top-details menu-beta l-inline">
                     <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
@@ -24,6 +25,7 @@
                     <li><a href="{{url('login')}}">Đăng nhập</a></li>
                 </ul>
                 @endif
+
             </div>
             <div class="clearfix"></div>
         </div> <!-- .container -->

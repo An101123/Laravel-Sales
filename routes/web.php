@@ -13,19 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/welcome', 'FrontEnd\PagesController@welcome');
 
-Auth::routes();
+
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('manageUser');
+Route::get('/login', 'Auth\LoginController@login');
 Route::get('/afterLogin',  'AfterLoginController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes(['verify' => true]);
 
-Route::group(['prefix' => 'admin','middleware'=>'admin','namespace'=>'Admin'],function(){
-Route::get('/home', 'HomeController@index')->middleware('verified');
+Route::group(['prefix' => 'admin','middleware'=>['admin','verified'],'namespace'=>'Admin'],function(){
+Route::get('/home', 'HomeController@index');
 
 Route::resource('categories', 'categoryController');
 

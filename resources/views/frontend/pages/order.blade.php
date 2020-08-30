@@ -25,10 +25,12 @@
                    value="{{ csrf_token() }}">
             <div class="row">@if(Session::has('notification'))
                 <div class="alert alert-success">
-                    {{Session::get('notification')}}
+                    <h4>{{Session::get('notification')}}</h4>
+
                 </div>
 
-                @endif</div>
+                @endif
+            </div>
             <div class="row">
 
                 <div class="col-sm-6">

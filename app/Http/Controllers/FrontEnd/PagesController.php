@@ -23,6 +23,11 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     //
+    
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
     function home()
     {
         $aboutus = aboutUs::all();
@@ -169,45 +174,50 @@ class PagesController extends Controller
     //         return redirect()->back()->with(['flag'=>'danger', 'message'=>'Email or password is incorrect']);
     //     }
     // }
-    function getSignup()
-    {
-        return view('frontend.pages.signup');
-    }
+    // function getSignup()
+    // {
+    //     return view('frontend.pages.signup');
+    // }
 
-    function postSignup(Request $request){
-        $this->validate($request,
-        [
-         'name'=>'required|min:3',
-         'email'=>'required|unique:Users,email',
-         'password'=>'required|min:8|max:32',
-         'passwordConfirm'=>'required|same:password'
-        ],
-        [
-            'name.required'=>'Name is require!',
-            'name.min'=>'Name must be at least three characters long',
-            'email.required'=>'Email is require!',
-            'email.unique'=>'Email has existed',
-            'password.required'=>'Password is require!',
-            'password.min'=>'Password must be at least eight characters long',
-            'password.max'=>'The largest length of the password is 32 characters',
-            'passwordConfirm.required'=>'Password Confirm is required',
-            'passwordConfirm.same'=>'Password Confirm is wrong!'
-        ]);
-    $user= new User;
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->phoneNumber = $request->phoneNumber;
-    $user->address = $request->address;
-    $user->password = Hash::make($request->password);
-    $user->save();
+    // function postSignup(Request $request){
+    //     $this->validate($request,
+    //     [
+    //      'name'=>'required|min:3',
+    //      'email'=>'required|unique:Users,email',
+    //      'password'=>'required|min:8|max:32',
+    //      'passwordConfirm'=>'required|same:password'
+    //     ],
+    //     [
+    //         'name.required'=>'Name is require!',
+    //         'name.min'=>'Name must be at least three characters long',
+    //         'email.required'=>'Email is require!',
+    //         'email.unique'=>'Email has existed',
+    //         'password.required'=>'Password is require!',
+    //         'password.min'=>'Password must be at least eight characters long',
+    //         'password.max'=>'The largest length of the password is 32 characters',
+    //         'passwordConfirm.required'=>'Password Confirm is required',
+    //         'passwordConfirm.same'=>'Password Confirm is wrong!'
+    //     ]);
+    // $user= new User;
+    // $user->name = $request->name;
+    // $user->email = $request->email;
+    // $user->phoneNumber = $request->phoneNumber;
+    // $user->address = $request->address;
+    // $user->password = Hash::make($request->password);
+    // $user->save();
         
-    return redirect()->back()->with('notification', 'You have signed up successfully');
-    }
+    // return redirect()->back()->with('notification', 'You have signed up successfully');
+    // }
 
 
     function search(Request $request)
     {
         $product = DB::table('products')->where('name','like','%'.$request->key.'%')->orwhere('price','=',$request->key)->get();
         return view('frontend.pages.search', compact('product'));
+    }
+
+    function welcome()
+    {
+        return view('verify');
     }
 }
