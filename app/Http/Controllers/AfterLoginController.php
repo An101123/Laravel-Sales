@@ -14,7 +14,7 @@ class AfterLoginController extends Controller
         if(Auth::user()->role==1){
             return redirect('/home');
         }else{
-            return redirect('/shoesstore');
+            return redirect('/');
         }
     }
 }

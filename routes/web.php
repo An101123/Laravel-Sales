@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/welcome', 'FrontEnd\PagesController@welcome');
 
+Route::get('/', 'FrontEnd\PagesController@home');
 
 Auth::routes(['verify' => true]);
 
@@ -44,7 +45,7 @@ Route::resource('aboutuses', 'aboutUsController');
 
 //Client
 
-Route::get('shoesstore', 'FrontEnd\PagesController@home');
+// Route::get('shoesstore', 'FrontEnd\PagesController@home');
 Route::get('shoesstore/categories/{category}', 'FrontEnd\PagesController@getCategory');
 Route::get('shoesstore/productDetails/{id}', 'FrontEnd\PagesController@getproductDetails');
 Route::get('shoesstore/contact', 'FrontEnd\PagesController@getContact');

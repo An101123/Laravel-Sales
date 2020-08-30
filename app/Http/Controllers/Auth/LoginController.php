@@ -62,7 +62,7 @@ class LoginController extends Controller
                     // User : return screen register schedule
                     return redirect('/home');
                 } else {
-                    return redirect('/shoesstore');
+                    return redirect('/');
                 }
             } else {
                 return redirect('/login');
@@ -84,6 +84,6 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/shoesstore');
+        return redirect('/');
     }
 }
