@@ -12,21 +12,63 @@
             </div>
             <div class="pull-right auto-width-right">
                 @if(Auth::check())
-                <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản: {{Auth::user()->name}}</a></li>
-                    <li><a href="{{url('/logout')}}">Đăng xuất</a></li>
-                </ul>
+                <!-- <ul class="top-details menu-beta l-inline">
+                    
 
+                </ul> -->
+                <ul class="nav navbar-nav ml-auto">
+                    <li><a href="#"><i class="fa fa-user"></i>{{__('Account')}}: {{Auth::user()->name}}</a></li>
+                    <li><a href="{{url('/logout')}}">{{__('Log out')}}</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link"
+                           style="margin-right: 10px"
+                           data-toggle="dropdown"
+                           href="#"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            {{__('Language')}} </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item"
+                               href="{{route('language', ['en'])}}">
+                                <i class="fa fa-envelope-o"></i> English
+                            </a>
+                            <a class="dropdown-item"
+                               href="{{route('language', ['vi'])}}">
+                                <i class="fa fa-envelope-o"></i> Vietnamese
+                            </a>
+                        </div>
+                    </li>
+                </ul>
 
                 @else
-                <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="{{url('register')}}">Đăng kí</a></li>
-                    <li><a href="{{url('login')}}">Đăng nhập</a></li>
-                </ul>
-                @endif
-
+                <ul class="nav navbar-nav ml-auto">
+                    <li><a href="#"><i class="fa fa-user"></i>{{__('Account')}}</a></li>
+                    <li><a href="{{url('register')}}">{{__('Sign up')}}</a></li>
+                    <li><a href="{{url('login')}}">{{__('Sign in')}}</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link"
+                           style="margin-right: 10px"
+                           data-toggle="dropdown"
+                           href="#"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            {{__('Language')}} </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <ul>
+                                <li cl><a class="dropdown-item"
+                                       href="{{route('language', ['en'])}}">
+                                        English
+                                    </a></li>
+                                <li><a class="dropdown-item"
+                                       href="{{route('language', ['vi'])}}">
+                                        Vietnamese
+                                    </a> </li>
+                            </ul>
+                        </div>
             </div>
+            @endif
             <div class="clearfix"></div>
         </div> <!-- .container -->
     </div> <!-- .header-top -->
@@ -111,8 +153,8 @@
             <div class="visible-xs clearfix"></div>
             <nav class="main-menu">
                 <ul class="l-inline ov">
-                    <li><a href="{{url('shoesstore')}}">Trang chủ</a></li>
-                    <li><a href="#">Sản phẩm</a>
+                    <li><a href="{{url('shoesstore')}}">{{__('Home')}}</a></li>
+                    <li><a href="#">{{__('Categories')}}</a>
                         <ul class="sub-menu">
                             @foreach($category as $category)
                             <li><a href="{{url('shoesstore/categories', $category->id)}}">{{$category->name}}</a>
@@ -120,8 +162,8 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li><a href="{{url('shoesstore/aboutus')}}">Giới thiệu</a></li>
-                    <li><a href="{{url('shoesstore/contact')}}">Liên hệ</a></li>
+                    <li><a href="{{url('shoesstore/aboutus')}}">{{__('About Us')}}</a></li>
+                    <li><a href="{{url('shoesstore/contact')}}">{{__('Contact')}}</a></li>
                 </ul>
                 <div class="clearfix"></div>
             </nav>

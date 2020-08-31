@@ -59,8 +59,10 @@
     <script src="assets/dest/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
     <script src="assets/dest/js/waypoints.min.js"></script>
     <script src="assets/dest/js/wow.min.js"></script>
+
     <!--customjs-->
     <script src="assets/dest/js/custom2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     @yield('script')
     <script>
     $(document).ready(function($) {

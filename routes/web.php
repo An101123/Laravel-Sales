@@ -25,7 +25,7 @@ Route::get('/afterLogin',  'AfterLoginController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes(['verify' => true]);
 
-Route::group(['prefix' => 'admin','middleware'=>['admin','verified'],'namespace'=>'Admin'],function(){
+Route::group(['prefix' => 'admin','middleware'=>['admin','verified']],function(){
 Route::get('/home', 'HomeController@index');
 
 Route::resource('categories', 'categoryController');
@@ -41,15 +41,19 @@ Route::resource('orders', 'orderController');
 Route::resource('orderDetails', 'orderDetailController');
 
 Route::resource('aboutuses', 'aboutUsController');
+
+
 });
 
 //Client
 
 // Route::get('shoesstore', 'FrontEnd\PagesController@home');
+Route::group(['prefix' => '/'],function(){
 Route::get('shoesstore/categories/{category}', 'FrontEnd\PagesController@getCategory');
 Route::get('shoesstore/productDetails/{id}', 'FrontEnd\PagesController@getproductDetails');
 Route::get('shoesstore/contact', 'FrontEnd\PagesController@getContact');
 Route::get('shoesstore/aboutus', 'FrontEnd\PagesController@getAboutus');
+Route::get('language/{language}', 'LanguageController@index')->name('language');
 
 //Cart
 Route::get('shoesstore/addToCart/{id}', 'FrontEnd\PagesController@getAddToCart');
@@ -61,6 +65,7 @@ Route::post('shoesstore/order', 'FrontEnd\PagesController@postOrder');
 
 //Search
 Route::get('shoesstore/search', 'FrontEnd\PagesController@search');
+});
 
 //login
 
