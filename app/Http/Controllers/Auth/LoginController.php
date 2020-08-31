@@ -41,34 +41,35 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    
 
 
-    public function login(Request $request) {
-        $user_login = [
-            'email' => $request->email,
-            'password' => $request->password
-        ];
-        if (Auth::attempt($user_login)) {
-            $user = \DB::table('users')->select('role')
-            ->where([
-                ['email', $request->email],
-                // ['del_flg', \Config::get('constants.DEL_FLG_0')],
-                ['email_verified_at', '<>', '']
-            ])->first();
+    // public function login(Request $request) {
+    //     $user_login = [
+    //         'email' => $request->email,
+    //         'password' => $request->password
+    //     ];
+    //     if (Auth::attempt($user_login)) {
+    //         $user = \DB::table('users')->select('role')
+    //         ->where([
+    //             ['email', $request->email],
+    //             // ['del_flg', \Config::get('constants.DEL_FLG_0')],
+    //             ['email_verified_at', '<>', '']
+    //         ])->first();
 
-            if ($user) {
-                $request->session()->put('users', $user_login);
-                if ($user->role == '1') {
-                    // User : return screen register schedule
-                    return redirect('/home');
-                } else {
-                    return redirect('/');
-                }
-            } else {
-                return redirect('/login');
-            }
-        }
-    }
+    //         if ($user) {
+    //             $request->session()->put('users', $user_login);
+    //             if ($user->role == '1') {
+    //                 // User : return screen register schedule
+    //                 return redirect('/home');
+    //             } else {
+    //                 return redirect('/');
+    //             }
+    //         } else {
+    //             return redirect('/login');
+    //         }
+    //     }
+    // }
 
 
     protected function credentials(Request $request)

@@ -37,7 +37,8 @@
           href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
           crossorigin="anonymous">
-
+    <link rel="stylesheet"
+          href="{{url('css/error.css')}}">
 
 </head>
 
@@ -47,7 +48,9 @@
             <div class="col-md-6">
                 <div class="card mx-4">
                     <div class="card-body p-4">
-                        <form method="post"
+                        <form name="register"
+                              id="register"
+                              method="post"
                               action="{{ url('/register') }}">
                             @csrf
                             <h1>Register</h1>
@@ -58,9 +61,11 @@
                                         <i class="fa fa-user"></i>
                                     </span>
                                 </div>
+
                                 <input type="text"
                                        class="form-control {{ $errors->has('name')?'is-invalid':'' }}"
                                        name="name"
+                                       id="name"
                                        value="{{ old('name') }}"
                                        placeholder="Full Name">
                                 @if ($errors->has('name'))
@@ -68,8 +73,10 @@
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                                 @endif
+
                             </div>
-                            <div class="input-group mb-3">
+
+                            <div class="input-group mb-3 ">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fa fa-envelope"></i>
@@ -80,13 +87,14 @@
                                        name="email"
                                        value="{{ old('email') }}"
                                        placeholder="Email">
+
                                 @if ($errors->has('email'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                                 @endif
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 ">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fa fa-phone "
@@ -108,10 +116,7 @@
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <!-- <i class="bi bi-telephone"
-                                           fill="currentColor"></i> -->
-                                        <i class="fa fa-map-marker"
-                                           aria-hidden="true"></i>
+                                        <i class="fa fa-map-marker"></i>
                                     </span>
                                 </div>
                                 <input type="text"
@@ -133,6 +138,7 @@
                                     </span>
                                 </div>
                                 <input type="password"
+                                       id="password"
                                        class="form-control {{ $errors->has('password')?'is-invalid':''}}"
                                        name="password"
                                        placeholder="Password">
@@ -154,7 +160,7 @@
                                        class="form-control"
                                        placeholder="Confirm password">
                                 @if ($errors->has('password_confirmation'))
-                                <span class="help-block">
+                                <span class="invalid-feedback">
                                     <strong>{{ $errors->first('password_confirmation') }}</strong>
                                 </span>
                                 @endif
@@ -185,9 +191,74 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
             crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"
+            type="text/javascript"></script> -->
+    <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"
+            type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"
+            type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $.validator.setDefaults({
+            errorClass: "help-block",
+            highlight: function(element) {
+                $(element)
+                    .closest('.input-group')
+                    .addClass('has-error');
+            }
+        });
+        $("#register").validate({
+            rules: {
+                name: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                phoneNumber: "required",
+                address: "required",
+                password: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 32
+                },
+                password_confirmation: {
+                    equalTo: "#password",
+                    required: true,
+                    minlength: 5,
+                    maxlength: 32
+                }
+            },
+            messages: {
+                name: "<span class='error'>Please enter your firstname</span>",
+                password: {
+                    required: "<span class='error'>Please provide a password</span>",
+                    minlength: "<span class='error'>Your password must be 8 - 32 characters long</span>",
+                    maxlength: "<span class='error'>Your password must be 8 - 32 characters long</span>"
+                },
+                password_confirmation: {
+                    equalTo: "<span class='error'>Please enter Confirm password same as password</span>",
+                    required: "<span class='error'>Please provide a password</span>",
+                    minlength: "<span class='error'>Your password must be 8 - 32 characters long</span>",
+                    maxlength: "<span class='error'>Your password must be 8 - 32 characters long</span>"
+
+                },
+                email: "<span class='error'>Please enter a valid email address</span>",
+                phoneNumber: "<span class='error'>Please enter your phone number</span>",
+                address: "<span class='error'>Please enter your address</span>"
+            },
+            // errorElement: 'div',
+            // errorLabelContainer: '.errorTxt',
+
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

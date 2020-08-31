@@ -20,7 +20,7 @@ Route::get('/', 'FrontEnd\PagesController@home');
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('manageUser');
-Route::get('/login', 'Auth\LoginController@login');
+// Route::get('/login', 'Auth\LoginController@login');
 Route::get('/afterLogin',  'AfterLoginController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes(['verify' => true]);
