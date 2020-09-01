@@ -30,6 +30,8 @@
     <link rel="stylesheet"
           title="style"
           href="{{url('assets/dest/css/huong-style.css')}}">
+    <link rel="stylesheet"
+          href="{{url('css/header.css')}}">
 </head>
 
 <body>

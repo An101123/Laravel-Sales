@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="beta-products-list">
-                        <h4>New Products</h4>
+                        <h4>{{__('New Products')}}</h4>
                         <div class="beta-products-details">
                             <!-- <p class="pull-left">438 styles found</p> -->
                             <div class="clearfix"></div>
@@ -110,7 +110,7 @@
                     <div class="space50">&nbsp;</div>
 
                     <div class="beta-products-list">
-                        <h4>Top Products</h4>
+                        <h4>{{__('Top Products')}}</h4>
                         <div class="beta-products-details">
                             <p class="pull-left">{{count($topProduct)}} items found</p>
                             <div class="clearfix"></div>

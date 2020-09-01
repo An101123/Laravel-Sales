@@ -73,16 +73,22 @@
                    role="button"
                    aria-haspopup="true"
                    aria-expanded="false">
-                    Language </a>
+                    {{__('Language')}} </a>
                 <div class="dropdown-menu dropdown-menu-right">
 
                     <a class="dropdown-item"
                        href="{{route('language', ['en'])}}">
-                        <i class="fa fa-envelope-o"></i> English
+                        <i><img width="10px"
+                                 height="10px"
+                                 src="image/english.png"
+                                 alt=""></i> English
                     </a>
                     <a class="dropdown-item"
                        href="{{route('language', ['vi'])}}">
-                        <i class="fa fa-envelope-o"></i> Vietnamese
+                        <i><img width="10px"
+                                 height="10px"
+                                 src="image/vietnam.png"
+                                 alt=""></i> Vietnamese
                     </a>
                 </div>
             </li>

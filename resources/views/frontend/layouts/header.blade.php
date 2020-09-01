@@ -12,13 +12,11 @@
             </div>
             <div class="pull-right auto-width-right">
                 @if(Auth::check())
-                <!-- <ul class="top-details menu-beta l-inline">
-                    
-
-                </ul> -->
                 <ul class="nav navbar-nav ml-auto">
-                    <li><a href="#"><i class="fa fa-user"></i>{{__('Account')}}: {{Auth::user()->name}}</a></li>
-                    <li><a href="{{url('/logout')}}">{{__('Log out')}}</a></li>
+                    <li><a href="#"><i class="fa fa-user"></i>{{__('Account')}}: {{Auth::user()->name}}<span
+                                  id="l1-contact-separator">&nbsp;|&nbsp;</span></a></li>
+                    <li><a href="{{url('/logout')}}">{{__('Log out')}}<span
+                                  id="l1-contact-separator">&nbsp;|&nbsp;</span></a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link"
                            style="margin-right: 10px"
@@ -29,23 +27,35 @@
                            aria-expanded="false">
                             {{__('Language')}} </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item"
-                               href="{{route('language', ['en'])}}">
-                                <i class="fa fa-envelope-o"></i> English
-                            </a>
-                            <a class="dropdown-item"
-                               href="{{route('language', ['vi'])}}">
-                                <i class="fa fa-envelope-o"></i> Vietnamese
-                            </a>
+                            <ul class="test">
+                                <li><a class="dropdown-item"
+                                       href="{{route('language', ['en'])}}"><i><img width="10px"
+                                                 height="10px"
+                                                 src="image/english.png"
+                                                 alt=""></i>
+                                        English
+                                    </a></li>
+                                <li><a class="dropdown-item"
+                                       href="{{route('language', ['vi'])}}"><i><img width="10px"
+                                                 height="10px"
+                                                 src="image/vietnam.png"
+                                                 alt=""></i>
+                                        Vietnamese
+                                    </a> </li>
+                            </ul>
                         </div>
                     </li>
                 </ul>
 
                 @else
                 <ul class="nav navbar-nav ml-auto">
-                    <li><a href="#"><i class="fa fa-user"></i>{{__('Account')}}</a></li>
-                    <li><a href="{{url('register')}}">{{__('Sign up')}}</a></li>
-                    <li><a href="{{url('login')}}">{{__('Sign in')}}</a></li>
+                    <li><a href="#"><i class="fa fa-user"></i>{{__('Account')}} <span
+                                  id="l1-contact-separator">&nbsp;|&nbsp;</span></a></li>
+
+                    <li><a href="{{url('register')}}">{{__('Sign up')}}<span
+                                  id="l1-contact-separator">&nbsp;|&nbsp;</span></a></li>
+                    <li><a href="{{url('login')}}">{{__('Sign in')}}<span
+                                  id="l1-contact-separator">&nbsp;|&nbsp;</span></a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link"
                            style="margin-right: 10px"
@@ -56,19 +66,28 @@
                            aria-expanded="false">
                             {{__('Language')}} </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <ul>
-                                <li cl><a class="dropdown-item"
-                                       href="{{route('language', ['en'])}}">
+                            <ul class="test">
+                                <li><a class="dropdown-item"
+                                       href="{{route('language', ['en'])}}"><i><img width="10px"
+                                                 height="10px"
+                                                 src="image/english.png"
+                                                 alt=""></i>
                                         English
                                     </a></li>
                                 <li><a class="dropdown-item"
-                                       href="{{route('language', ['vi'])}}">
+                                       href="{{route('language', ['vi'])}}"><i><img width="10px"
+                                                 height="10px"
+                                                 src="image/vietnam.png"
+                                                 alt=""></i>
                                         Vietnamese
                                     </a> </li>
                             </ul>
                         </div>
+                    </li>
+                </ul>
+                @endif
             </div>
-            @endif
+
             <div class="clearfix"></div>
         </div> <!-- .container -->
     </div> <!-- .header-top -->
